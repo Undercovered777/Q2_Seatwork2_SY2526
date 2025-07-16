@@ -1,39 +1,75 @@
 from pyscript import display, document
 
-
-def general_weighted_average(e):
-    document.getElementById('student_info').innerHTML = ' '
-    document.getElementById('summary').innerHTML = ' '
-    document.getElementById('output').innerHTML = ' '
-    subjects = ['Science', 'Math', 'English', 'Filipino', 'ICT', 'PE']
-    units_subject = (5, 3, 2, 1)
-
-    first_name = document.getElementById('first_name').value
-    last_name = document.getElementById('last_name').value
-
-    science = float(document.getElementById('science').value)
-    math = float(document.getElementById('math').value)
-    english = float(document.getElementById('english').value)
-    filipino = float(document.getElementById('filipino').value)
-    ict = float(document.getElementById('ict').value)
-    pe = float(document.getElementById('pe').value)
-
-    weighted_sum = (science * units_subject[0] + 
-           math * units_subject[0] + 
-           english * units_subject[0] + 
-           filipino * units_subject[1] + 
-           ict * units_subject[2] + 
-           pe * units_subject[3]) 
-    total_units = (units_subject[0] * 3) + units_subject[1] + units_subject[2] + units_subject[3]
-    gwa = weighted_sum / total_units
-    
-    summary = f"""{subjects[0]}: {science:.0f}
-{subjects[1]}: {math:.0f}
-{subjects[2]}: {english:.0f}
-{subjects[3]}: {filipino:.0f}
-{subjects[4]}: {ict:.0f}
-{subjects[5]}: {pe:.0f}
-    """
-    display(f'Name: {first_name} {last_name}', target="student_info")
-    display(summary, target='summary')
-    display(f'Your general weighted average is {gwa:.2f}', target='output', )
+# Define club information using dictionaries
+club_info = {
+            "chess": {
+                "name": "Chess Club",
+                "description": "A club for chess enthusiasts of all skill levels.",
+                "meeting_time": "Every Wednesday 3:30-5:00 PM",
+                "location": "Room 405",
+                "advisor": "Mr. Santos",
+                "members": 20,
+                "category": "Academic"
+            },
+            "drama": {
+                "name": "Drama Club",
+                "description": "For students interested in theater, acting, and stage production.",
+                "meeting_time": "Every Monday and Thursday 4:00-6:00 PM",
+                "location": "MM Hall",
+                "advisor": "Ms. Evangelista",
+                "members": 22,
+                "category": "Arts"
+            },
+            "robotics": {
+                "name": "Robotics Club",
+                "description": "Design, build, and program robots for competitions.",
+                "meeting_time": "Every Tuesday 3:45-5:30 PM",
+                "location": "Computer Lab",
+                "advisor": "Ms. Pasco",
+                "members": 18,
+                "category": "Academic"
+            },
+            "debate": {
+                "name": "Debate Club",
+                "description": "Develop public speaking and argumentation skills.",
+                "meeting_time": "Every Friday 3:30-5:00 PM",
+                "location": "Room 507",
+                "advisor": "Ms. Carabot",
+                "members": 12,
+                "category": "Academic"
+            },
+            "art": {
+                "name": "Art Club",
+                "description": "Explore various art mediums and techniques.",
+                "meeting_time": "Every Wednesday 3:45-5:15 PM",
+                "location": "Art Room",
+                "advisor": "Mr. Balajadia",
+                "members": 20,
+                "category": "Arts"
+            },
+            "": {
+                "name": "",
+                "description": "",
+                "meeting_time": "",
+                "location": "",
+                "advisor": "",
+                "members": "",
+                "category": ""
+            }
+        }
+        
+def show_club_info(e):
+    document.getElementById('club-info').innerHTML = " "
+    selected_club = document.getElementById("club-select").value
+    info = club_info.get(selected_club, club_info[""])
+            
+    output = f"""
+            {info['name']}
+            Description:{info['description']}
+            Meeting Time: {info['meeting_time']}
+            Location: {info['location']}
+            Advisor: {info['advisor']}
+            Number of Members: {info['members']}
+            Category: {info['category']}
+            """
+    display(output, target="club-info")
